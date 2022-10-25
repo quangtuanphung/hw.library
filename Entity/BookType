@@ -1,0 +1,24 @@
+package hw.library;
+
+public class BookType {
+private int ISBN;
+private int typeId;
+public int getISBN() {
+	return ISBN;
+}
+public void setISBN(int ISBN) {
+	this.ISBN = ISBN;
+}
+public int getTypeId() {
+	return typeId;
+}
+public void setTypeId(int typeId) {
+	this.typeId = typeId;
+}
+public BookType(int ISBN, int typeId) {
+	super();
+	this.ISBN = ISBN;
+	this.typeId = typeId;
+}
+
+}
