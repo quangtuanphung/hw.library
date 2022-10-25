@@ -1,0 +1,12 @@
+package hw.library;
+
+
+
+public class Main {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		BookService dataService = new BookService();
+		dataService.showBorrowListByAllUsers(BookDataSource.getBorrowReturnRecords(), BookDataSource.getUsers(),BookDataSource.getBooks(), BookDataSource.getBookTypes(), BookDataSource.getAllTypes());
+	}
+}
