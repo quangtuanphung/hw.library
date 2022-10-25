@@ -1,0 +1,120 @@
+package hw.library;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import java.time.LocalDate;
+
+import java.time.format.DateTimeFormatter;
+
+public class BookService {
+//DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-mm-yyyy");
+
+	String dateFormat = "dd/MM/yyyy";
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateFormat);
+
+//	System.out.println(sdf.format(date));
+//	
+//	sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+//	DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateFormat);
+//	LocalDate currentDate = LocalDate.now();
+//ZoneId zoneId = ZoneId.of("Europe/Brussels");
+//ZonedDate zonedDate
+//LocalDate trueReturnDate = LocalDate.parse(BorrowReturnRecord.getTrueReturnDate(), dtf);
+	public String getBorrowStatus(BorrowReturnRecord borrowReturnRecords) {
+		String date = "25/10/2022";
+		LocalDate currentDate = LocalDate.parse(date, dtf);
+		LocalDate returnDueDate = LocalDate.parse(borrowReturnRecords.getReturnDueDate(), dtf);
+		LocalDate trueReturnDate = LocalDate.parse(borrowReturnRecords.getTrueReturnDate(), dtf);
+		if (borrowReturnRecords.getTrueReturnDate().equals(null)) {
+			if (!currentDate.isBefore(returnDueDate))
+				return "Overdue";
+			else
+				return "Borowed";
+		} else {
+			if (!trueReturnDate.isBefore(returnDueDate))
+				return "Late Return";
+			else
+				return "Returned";
+		}
+
+	}
+
+//	public BorrowReturnRecord[] getBorrowRecordByUserId(BorrowReturnRecord[] borrowReturnRecords, String userId) {
+//		BorrowReturnRecord records = new BorrowReturnRecord();
+//		return null;
+//	}
+//	public void showListByUserID() {
+//		
+////		String format = "%-15s %-20s %-15s %-15s %-15s %-15s %-30s\n";
+////		System.out.printf(format, "Customer", "Borrowed Book", "Author", "Borrowed Date", "Return Date", "Due Date",
+////				"Store Location");
+//
+//		for (User u : BookDataSource.users) {
+//			for (BorrowReturnRecord record : BookDataSource.borrowReturnRecords) {
+//				if (record.getUserId() == u.getId()) {
+//
+//				}
+//			}
+//		}
+//	}
+	public static ArrayList<BorrowReturnRecord> getBorrowListByUserID(BorrowReturnRecord[] borrowReturnRecords,
+			int userID) {
+//	BorrowReturnRecord[] records = null;
+		ArrayList<BorrowReturnRecord> list = new ArrayList<BorrowReturnRecord>();
+
+		for (BorrowReturnRecord record : borrowReturnRecords) {
+
+			if (record.getUserId() == userID)
+				list.add(record);
+		}
+
+		return list;
+
+	}
+
+public void showBorrowListByAllUsers(BorrowReturnRecord[] borrowReturnRecords,User[] users, Book[] books, BookType[] bookTypes,
+		AllType[] allTypes) {
+	String f = "%-15s %-35s %-30s %-30s %-15s %-15s %-15s\n";
+	System.out.printf(f, "User", "Book", "Author", "Type", "Borrow Date", "Return Date", "Status");
+for (User u: users) {
+	for(BorrowReturnRecord rc: borrowReturnRecords) {
+		if(rc.getUserId()== u.getId()) {
+			Book bk = getBookByISBN(books,rc.getISBN());
+			String booktypes = getBookTypeByISBN(bookTypes, allTypes, rc.getISBN());
+			System.out.printf(f, u.getName(), bk.getName(), bk.getAuthor(), booktypes, rc.getBorrowDate(), rc.getTrueReturnDate(), getBorrowStatus(rc));
+		}
+	}
+}
+}
+
+//	public static Book getBookbyID(int bookId) {
+//		for (Book bk : BookDataSource.books) {
+//			if (bk.getIsbn() == bookId) {
+//
+//			}
+//
+//		}
+//		return null;
+//	}
+	public Book getBookByISBN(Book[] books, int ISBN) {
+		for (Book book : books) {
+			if (ISBN == book.getIsbn())
+				return book;
+		}
+		return null;
+	}
+
+	public String getBookTypeByISBN(BookType[] bookTypes, AllType[] allTypes, int ISBN) {
+		String bookISBN = null;
+		for (BookType bookType : bookTypes) {
+			for (AllType alltype : allTypes)
+				if (ISBN == bookType.getISBN() && bookType.getTypeId() == bookType.getTypeId()) {
+					bookISBN += "(" + alltype.getType() + ")";
+				}
+
+		}
+		return bookISBN;
+	}
+}
