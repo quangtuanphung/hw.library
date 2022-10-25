@@ -1,0 +1,48 @@
+package hw.library;
+
+import java.util.ArrayList;
+
+public class BookDataSource {
+//	private ArrayList<BookType> bookTypes = new ArrayList<BookType>();
+	public static AllType[] allTypes = { new AllType(1, "Tieu Thuyet"), new AllType(2, "Khoa Hoc"),
+			new AllType(3, "Vien Tuong"), new AllType(4, "Van Hoc"), new AllType(5, "Hu Cau") };
+	public static Book[] books = { new Book(1, 123456789, "Tuoi Tho Du Doi", "Phung Quan"),
+			new Book(2, 987654321, "Tram Tin Hieu So 23", "Hugh Howey"),
+			new Book(1, 135791113, "De Men Phieu Luu Ky", "To Hoai") };
+	public static BookType[] bookTypes = { new BookType(1, 1), new BookType(1, 4), new BookType(2, 2),
+			new BookType(2, 3), new BookType(2, 5), new BookType(3, 1), new BookType(3, 4), new BookType(3, 5) };
+	public static BorrowReturnRecord[] borrowReturnRecords = {
+			new BorrowReturnRecord(1, 123, 1454352, "18/10/2022", "30/10/2022", null),
+			new BorrowReturnRecord(2, 321, 253243, "10/10/2022", "17/10/2022", "15/10/2022"),
+			new BorrowReturnRecord(3, 213, 35435435, "11/10/2022", "18/10/2022", "13/10/2022") };
+
+	public static Location[] locations = { new Location(1, "HCM"), new Location(2, "Hanoi") };
+	public static Stock[] stocks = { new Stock(1, 1, 10), new Stock(2, 2, 11), new Stock(3, 1, 20) };
+	public static User[] users = { new User(123, "Tuan"), new User(321, "Quang"), new User(213, "Linh") };
+	public static Book[] getBooks() {
+		return books;
+	}
+	public static AllType[] getAllTypes() {
+		return allTypes;
+	}
+	public static BookType[] getBookTypes() {
+		return bookTypes;
+	}
+	public static BorrowReturnRecord[] getBorrowReturnRecords() {
+		return borrowReturnRecords;
+	}
+	public static Location[] getLocations() {
+		return locations;
+	}
+	public static Stock[] getStocks() {
+		return stocks;
+	}
+	public static User[] getUsers() {
+		return users;
+	}
+	
+	
+	}
+	
+	// public static BookType[] booktypes = {new BookType(1, {3,4})};
+
